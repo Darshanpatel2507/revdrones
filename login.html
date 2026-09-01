@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Login — RevDrones</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="grain-bg">
+<div class="auth-shell">
+  <div class="auth-card">
+    <a href="index.html" class="logo" style="margin-bottom:22px; display:flex;">
+      <svg class="mark" width="28" height="28" viewBox="0 0 30 30" fill="none">
+        <path d="M15 4L24 10L15 16L6 10L15 4Z" fill="#e63946"/>
+        <path d="M15 16V26" stroke="#e63946" stroke-width="2"/>
+        <path d="M9 21H21" stroke="#e63946" stroke-width="2"/>
+      </svg>
+      REV DRONES
+    </a>
+    <span class="pill" style="margin-bottom:16px;">STAFF ACCESS</span>
+    <h1>Staff login</h1>
+    <p class="sub">Sign in to manage bookings and the blog.</p>
+
+    <form id="login-form" style="margin-top:24px;">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      <div id="login-msg" class="form-msg"></div>
+    </form>
+
+    <p style="margin-top:18px; font-size:13px; color:var(--ink-faint);">
+      Not staff? <a href="index.html" style="color:var(--red);">Return to site →</a>
+    </p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = "https://axxctupcnmzropjtifrz.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4eGN0dXBjbm16cm9wanRpZnJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1NzI5ODgsImV4cCI6MjEwMzE0ODk4OH0.5ZSUAePv27GKjjT6JGZ6O8MuKVa5Dhj_OyDEwfij_rk";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// If already signed in, skip straight to the dashboard.
+(async () => {
+  const { data } = await sb.auth.getSession();
+  if (data.session) window.location.href = "dashboard.html";
+})();
+
+const form = document.getElementById("login-form");
+const msg = document.getElementById("login-msg");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  msg.textContent = "Signing in…";
+  msg.className = "form-msg";
+
+  const email = form.email.value.trim();
+  const password = form.password.value;
+
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    msg.textContent = error.message === "Invalid login credentials"
+      ? "Incorrect email or password."
+      : error.message;
+    msg.className = "form-msg err";
+    return;
+  }
+
+  msg.textContent = "Signed in — redirecting…";
+  msg.className = "form-msg ok";
+  window.location.href = "dashboard.html";
+});
+</script>
+</body>
+</html>

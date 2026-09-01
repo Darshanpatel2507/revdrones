@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaaS Intelligence | RevDrones Revolutionized</title>
+<meta name="description" content="Revolutionized — AI-assisted drone data analysis for wind, solar, powerline, and pipeline assets.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.revdrones.in/saas/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RevDrones">
+<meta property="og:title" content="SaaS Intelligence | RevDrones Revolutionized">
+<meta property="og:description" content="Revolutionized — AI-assisted drone data analysis for wind, solar, powerline, and pipeline assets.">
+<meta property="og:locale" content="en_IN">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="grain-bg">
+<div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a href="../index.html" class="logo">
+      <img class="mark mini-drone" src="https://revdrones.in/assets/img/logo_light.png" alt="RevDrones logo"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+      <span class="mark mini-drone logo-fallback" style="display:none;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <rect x="9" y="9" width="6" height="6" rx="1.4" fill="#e63946"/>
+          <line x1="9" y1="9" x2="4" y2="4" stroke="#e63946" stroke-width="1.3"/>
+          <line x1="15" y1="9" x2="20" y2="4" stroke="#e63946" stroke-width="1.3"/>
+          <line x1="9" y1="15" x2="4" y2="20" stroke="#e63946" stroke-width="1.3"/>
+          <line x1="15" y1="15" x2="20" y2="20" stroke="#e63946" stroke-width="1.3"/>
+          <circle cx="4" cy="4" r="2.5" fill="none" stroke="#f4f6ff" stroke-width="1"/>
+          <circle cx="20" cy="4" r="2.5" fill="none" stroke="#f4f6ff" stroke-width="1"/>
+          <circle cx="4" cy="20" r="2.5" fill="none" stroke="#f4f6ff" stroke-width="1"/>
+          <circle cx="20" cy="20" r="2.5" fill="none" stroke="#f4f6ff" stroke-width="1"/>
+        </svg>
+        REV DRONES
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#industries">Industries</a>
+      <a href="../saas.html">SaaS</a>
+      <a href="../index.html#blog">Blog</a>
+      <a href="../careers.html">Careers</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="../index.html#contact" class="btn btn-outline magnetic">Book a flight</a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </div>
+</header>
+
+<section class="saas-hero" style="padding-bottom: 40px;">
+  <canvas class="saas-bg-canvas" id="saas-bg"></canvas>
+  <div class="wrap">
+    <div class="saas-hero-copy reveal">
+      <div class="eyebrow">SAAS INTELLIGENCE PLATFORM</div>
+      <h1>Revolutionized — Data Intelligence for Every Asset You Fly Over.</h1>
+      <p>Proprietary computer vision and neural defect analytics to process raw drone datasets into actionable, engineering-grade findings. Built specifically for energy, grid, and industrial asset managers.</p>
+    </div>
+
+    <!-- Interactive AI Neural Inspector Console -->
+    <div style="margin-top: 36px;" id="saas-interactive-app">
+      <!-- Sector Tabs -->
+      <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 26px;" id="sector-tabs">
+        <button class="sector-tab-btn active" data-sector="wind">Revolutionized Wind</button>
+        <button class="sector-tab-btn" data-sector="solar">Revolutionized Solar</button>
+        <button class="sector-tab-btn" data-sector="powerline">Revolutionized Powerline</button>
+        <button class="sector-tab-btn" data-sector="pipeline">Revolutionized Pipeline</button>
+      </div>
+
+      <!-- Console Panel -->
+      <div class="saas-console-box" style="background: linear-gradient(180deg, rgba(14,19,53,0.95), rgba(8,11,28,0.98)); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 28px; box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 30px rgba(230,57,70,0.12); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center;">
+        <!-- Left Frame -->
+        <div style="position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); background: #05070f;">
+          <div style="position: relative; width: 100%; height: 320px; overflow: hidden;">
+            <img id="console-img" src="https://www.revdrones.in/assets/uploads/1725467504_pipeline1.jpg" alt="Drone Data" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.15) brightness(0.9);">
+            
+            <div id="ai-overlay-grid" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(0,225,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,225,255,0.06) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none;"></div>
+
+            <div id="ai-bounding-box" style="position: absolute; top: 32%; left: 35%; width: 140px; height: 80px; border: 2px solid #e63946; box-shadow: 0 0 16px #e63946, inset 0 0 10px rgba(230,57,70,0.3); border-radius: 4px;">
+              <div id="ai-tag-label" style="position: absolute; top: -24px; left: -2px; background: #e63946; color: #fff; font-family: var(--mono); font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 3px; white-space: nowrap;">
+                AI DETECTED · 99.1% Confidence
+              </div>
+            </div>
+
+            <div style="position: absolute; top: 12px; right: 12px; font-family: var(--mono); font-size: 10px; color: #00e1ff; background: rgba(10,14,39,0.85); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(0,225,255,0.3);">
+              ENGINE: YOLO-V9 RESNET · LIVE
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(10,14,39,0.95); border-top: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-family: var(--mono); fontSize: 11px; color: #aab3d1;">
+              MODE: <b id="mode-text-indicator" style="color: #00e1ff;">AI Neural Layer</b>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button id="btn-mode-raw" style="background: rgba(255,255,255,0.06); color: #fff; border: none; border-radius: 6px; padding: 4px 10px; font-size: 10.5px; font-family: var(--mono); cursor: pointer;">Raw Data</button>
+              <button id="btn-mode-ai" style="background: #e63946; color: #fff; border: none; border-radius: 6px; padding: 4px 10px; font-size: 10.5px; font-family: var(--mono); cursor: pointer;">AI Neural Layer</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Findings Info -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span id="sector-badge" style="font-family: var(--mono); font-size: 10px; color: #ff8790; background: rgba(230,57,70,0.15); border: 1px solid rgba(230,57,70,0.3); padding: 2px 8px; border-radius: 99px; font-weight: 600; text-transform: uppercase;">
+              AiServe Wind Core
+            </span>
+            <span style="font-family: var(--mono); font-size: 10.5px; color: #6b7396;">
+              REV-AI-v4.2
+            </span>
+          </div>
+
+          <h3 id="sector-title" style="font-family: var(--display); font-size: 22px; margin-bottom: 10px; color: #fff;">
+            Revolutionized Wind
+          </h3>
+
+          <p id="sector-desc" style="font-size: 13.5px; color: #aab3d1; line-height: 1.6; margin-bottom: 18px;">
+            Automated millimeter-accurate defect classification across turbine blades, nacelles, and towers with severity-ranked repair queues.
+          </p>
+
+          <div style="background: rgba(10,14,39,0.7); border: 1px solid rgba(230,57,70,0.25); border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
+            <div style="font-family: var(--mono); font-size: 10.5px; color: #ff8790; margin-bottom: 4px;">ACTIVE DETECTED ANOMALY</div>
+            <div id="sector-defect-name" style="font-weight: 600; font-size: 14px; color: #fff;">Trailing Edge Delamination &amp; Erosion</div>
+            <div id="sector-defect-loc" style="font-family: var(--mono); font-size: 11px; color: #8f9bb3; margin-top: 3px;">📍 Blade #2 (Upper Tip, Span 34.2m)</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 22px;">
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px; text-align: center;">
+              <div id="stat-speed" style="font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: #fff;">2.4 hrs / Turbine</div>
+              <div style="font-family: var(--mono); font-size: 9px; color: #6b7396; margin-top: 2px;">SPEED</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px; text-align: center;">
+              <div id="stat-acc" style="font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: #10b981;">99.4% F1-Score</div>
+              <div style="font-family: var(--mono); font-size: 9px; color: #6b7396; margin-top: 2px;">ACCURACY</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px; text-align: center;">
+              <div id="stat-eff" style="font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: #ffb703;">85% Downtime Reduced</div>
+              <div style="font-family: var(--mono); font-size: 9px; color: #6b7396; margin-top: 2px;">EFFICIENCY</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px;">
+            <a id="sector-link" href="wind.html" class="btn btn-primary magnetic" style="padding: 10px 20px; font-size: 13px;">
+              Launch 3D Hub &amp; Specs →
+            </a>
+            <a href="../index.html#contact" class="btn btn-outline magnetic" style="padding: 10px 20px; font-size: 13px;">
+              Request Platform Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-Step AI Workflow Architecture -->
+      <div style="margin-top: 60px;">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <div class="eyebrow">INTELLIGENCE PIPELINE</div>
+          <h2 style="font-size: 28px;">How Revolutionized Transforms Aerial Datasets</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;" class="saas-steps-grid">
+          <div style="background: rgba(10,14,39,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; position: relative;" class="tilt">
+            <div style="font-family: var(--mono); font-size: 24px; font-weight: 800; color: #e63946; margin-bottom: 10px;">01</div>
+            <h4 style="font-size: 17px; color: #fff; margin-bottom: 8px;">Flight Ingest &amp; Geotag Alignment</h4>
+            <p style="font-size: 13.5px; color: #aab3d1; line-height: 1.5;">Upload raw high-overlap folders (RGB, Radiometric FLIR, or LiDAR). The engine auto-aligns flight telemetry, KML corridors, and timestamped coordinates.</p>
+          </div>
+
+          <div style="background: rgba(10,14,39,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; position: relative;" class="tilt">
+            <div style="font-family: var(--mono); font-size: 24px; font-weight: 800; color: #e63946; margin-bottom: 10px;">02</div>
+            <h4 style="font-size: 17px; color: #fff; margin-bottom: 8px;">Deep Neural Anomaly Detection</h4>
+            <p style="font-size: 13.5px; color: #aab3d1; line-height: 1.5;">Custom computer vision models process each pixel to classify blade cracks, solar thermal hotspot cell ΔT, insulator degradation, and methane gas signatures.</p>
+          </div>
+
+          <div style="background: rgba(10,14,39,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; position: relative;" class="tilt">
+            <div style="font-family: var(--mono); font-size: 24px; font-weight: 800; color: #e63946; margin-bottom: 10px;">03</div>
+            <h4 style="font-size: 17px; color: #fff; margin-bottom: 8px;">CAD / GIS Work Order Export</h4>
+            <p style="font-size: 13.5px; color: #aab3d1; line-height: 1.5;">Instantly export categorized findings into AutoCAD (<code style="color: #ff8790;">.DXF</code>), ArcGIS Shapefiles (<code style="color: #ff8790;">.SHP</code>), or 1-click executive PDF audit reports.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Dedicated Sector Exploration Hubs -->
+<section class="section-tight" style="padding-top: 20px;">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align: center; margin-bottom: 32px;">
+      <div class="eyebrow">EXPLORE 3D SECTOR HUBS</div>
+      <h2 style="font-size: 28px;">Explore Dedicated Sector Intelligence</h2>
+      <p style="color: #aab3d1; max-width: 600px; margin: 0 auto;">Dive into real-time 3D vector digital twins with autonomous flight paths and automated anomaly detection for each critical industry.</p>
+    </div>
+
+    <div class="saas-grid">
+      <a href="wind.html" class="saas-card tilt">
+        <div class="saas-card-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12L20 8" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M12 12L6 5" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M12 12L15 20" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.8" fill="#e63946"/></svg></div>
+        <h3>Revolutionized Wind</h3>
+        <p>Automated blade defect detection from turbine inspection imagery — cracks, leading-edge erosion, and lightning strikes flagged and categorized.</p>
+        <span class="go">Launch 3D Hub →</span>
+      </a>
+      <a href="solar.html" class="saas-card tilt">
+        <div class="saas-card-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#e63946" stroke-width="1.6"/><path d="M12 2V5" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M12 19V22" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M4.2 4.2L6.3 6.3" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M17.7 17.7L19.8 19.8" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M2 12H5" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M19 12H22" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M4.2 19.8L6.3 17.7" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><path d="M17.7 6.3L19.8 4.2" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Revolutionized Solar</h3>
+        <p>Thermal and RGB analysis of solar farm arrays — hotspot cells, open string circuits, and soiling patterns mapped directly to table CAD layout.</p>
+        <span class="go">Launch 3D Hub →</span>
+      </a>
+      <a href="powerline.html" class="saas-card tilt">
+        <div class="saas-card-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 17C6 17 6 8 9 8C12 8 12 17 15 17C18 17 18 8 21 8" stroke="#e63946" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="17" r="1.6" fill="#e63946"/><circle cx="21" cy="8" r="1.6" fill="#e63946"/></svg></div>
+        <h3>Revolutionized Powerline</h3>
+        <p>Component-level transmission corridor analytics — insulator flashover degradation, conductor strand fractures, and right-of-way clearance.</p>
+        <span class="go">Launch 3D Hub →</span>
+      </a>
+      <a href="pipeline.html" class="saas-card tilt">
+        <div class="saas-card-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 8H14C16.2091 8 18 9.79086 18 12C18 14.2091 16.2091 16 14 16H10" stroke="#e63946" stroke-width="1.6" stroke-linecap="round"/><circle cx="4" cy="8" r="2" stroke="#e63946" stroke-width="1.6"/><circle cx="10" cy="16" r="2" stroke="#e63946" stroke-width="1.6"/></svg></div>
+        <h3>Revolutionized Pipeline</h3>
+        <p>Thermal and optical pipeline right-of-way monitoring — hydrocarbon leak signatures, exposed pipe sections, and unauthorized encroachment.</p>
+        <span class="go">Launch 3D Hub →</span>
+      </a>
+    </div>
+
+    <!-- Enterprise Consultation Band -->
+    <div class="service-cta-band reveal" style="margin-top: 48px;">
+      <div>
+        <h4>Deploy Revolutionized for Your Enterprise</h4>
+        <p>Schedule a live 30-minute demonstration with our computer vision engineers and test sample datasets from your own assets.</p>
+      </div>
+      <a href="../index.html#contact" class="btn btn-primary magnetic">
+        Book a Live Demo
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <img class="mark mini-drone" src="https://revdrones.in/assets/img/logo_light.png" alt="RevDrones logo">
+        </a>
+        <p>Industrial drone solutions engineered for scale, safety, and precision across India's core sectors.</p>
+      </div>
+      <div class="footer-col">
+        <h6>Services</h6>
+        <ul>
+          <li><a href="../services/agriculture.html">Precision Agriculture</a></li>
+          <li><a href="../services/surveying-mapping.html">Surveying &amp; Mapping</a></li>
+          <li><a href="../services/inspection.html">Industrial Inspection</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Industries</h6>
+        <ul>
+          <li><a href="../industries/agriculture.html">Agriculture</a></li>
+          <li><a href="../industries/mining.html">Mining &amp; Aggregates</a></li>
+          <li><a href="../industries/renewable-energy.html">Renewable Energy</a></li>
+          <li><a href="../industries/construction.html">Infrastructure</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Platform</h6>
+        <ul>
+          <li><a href="../saas.html">SaaS Intelligence</a></li>
+          <li><a href="wind.html">Revolutionized Wind</a></li>
+          <li><a href="solar.html">Revolutionized Solar</a></li>
+          <li><a href="powerline.html">Revolutionized Powerline</a></li>
+          <li><a href="pipeline.html">Revolutionized Pipeline</a></li>
+          <li><a href="../careers.html">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RevDrones. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../terms-and-conditions.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/app.js"></script>
+<script src="../assets/chatbot.js"></script>
+<script src="../assets/saas-bg.js"></script>
+
+<!-- Interactive Console Script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sectors = {
+    wind: {
+      name: "Revolutionized Wind",
+      badge: "AiServe Wind Core",
+      img: "https://www.revdrones.in/assets/uploads/1725467504_pipeline1.jpg",
+      speed: "2.4 hrs / Turbine",
+      acc: "99.4% F1-Score",
+      eff: "85% Downtime Reduced",
+      defectName: "Trailing Edge Delamination & Erosion",
+      defectLoc: "📍 Blade #2 (Upper Tip, Span 34.2m)",
+      confidence: "99.1% Confidence",
+      desc: "Automated millimeter-accurate defect classification across turbine blades, nacelles, and towers with severity-ranked repair queues.",
+      link: "wind.html"
+    },
+    solar: {
+      name: "Revolutionized Solar",
+      badge: "AiServe Solar Core",
+      img: "https://www.revdrones.in/assets/uploads/1725466201_WhatsApp_Image_2024-09-03_at_10_51_29_AM1.jpeg",
+      speed: "15 min / MWp",
+      acc: "99.8% Anomaly Rate",
+      eff: "92% Inspection Speedup",
+      defectName: "Thermal String Hotspot & Bypass Diode Open",
+      defectLoc: "📍 Table 14-B · String 04 · Cell 18 (ΔT +16.8°C)",
+      confidence: "98.7% Confidence",
+      desc: "Radiometric infrared aerial scanning mapped to plant CAD layouts for rapid identification of inactive strings and cracked cells.",
+      link: "solar.html"
+    },
+    powerline: {
+      name: "Revolutionized Powerline",
+      badge: "AiServe Grid Core",
+      img: "https://www.revdrones.in/assets/uploads/1725467338_WhatsApp_Image_2024-09-03_at_10_43_05_AM1.jpeg",
+      speed: "45 km / Flight Day",
+      acc: "98.9% Defect Rate",
+      eff: "78% OPEX Savings",
+      defectName: "Polymer Insulator Flashover & Strand Broken",
+      defectLoc: "📍 Tower #108 · Phase Y · Crossarm 02",
+      confidence: "97.9% Confidence",
+      desc: "Component-level transmission corridor analytics detecting insulator degradation, abnormal catenary sag, and right-of-way vegetation encroachment.",
+      link: "powerline.html"
+    },
+    pipeline: {
+      name: "Revolutionized Pipeline",
+      badge: "AiServe Corridor Core",
+      img: "https://www.revdrones.in/assets/uploads/1725467504_pipeline1.jpg",
+      speed: "60 km / Flight Day",
+      acc: "99.2% Leak Pinpointing",
+      eff: "88% Hazard Avoidance",
+      defectName: "Subsurface Fluid Hydrocarbon Thermal Signature",
+      defectLoc: "📍 Section KP-44.8 · Elevation 214m · Flange 08",
+      confidence: "99.3% Confidence",
+      desc: "High-sensitivity thermal and optical right-of-way corridor analysis flagging leak signatures, exposed pipe sections, and unauthorized heavy machinery.",
+      link: "pipeline.html"
+    }
+  };
+
+  let activeSectorKey = "wind";
+  let activeMode = "ai";
+
+  const tabButtons = document.querySelectorAll(".sector-tab-btn");
+  const imgEl = document.getElementById("console-img");
+  const overlayGrid = document.getElementById("ai-overlay-grid");
+  const boundingBox = document.getElementById("ai-bounding-box");
+  const tagLabel = document.getElementById("ai-tag-label");
+  const modeText = document.getElementById("mode-text-indicator");
+  const btnRaw = document.getElementById("btn-mode-raw");
+  const btnAi = document.getElementById("btn-mode-ai");
+
+  const badgeEl = document.getElementById("sector-badge");
+  const titleEl = document.getElementById("sector-title");
+  const descEl = document.getElementById("sector-desc");
+  const defectNameEl = document.getElementById("sector-defect-name");
+  const defectLocEl = document.getElementById("sector-defect-loc");
+  const statSpeedEl = document.getElementById("stat-speed");
+  const statAccEl = document.getElementById("stat-acc");
+  const statEffEl = document.getElementById("stat-eff");
+  const linkEl = document.getElementById("sector-link");
+
+  function renderSector(key) {
+    const data = sectors[key];
+    if (!data) return;
+    activeSectorKey = key;
+
+    imgEl.src = data.img;
+    badgeEl.textContent = data.badge;
+    titleEl.textContent = data.name;
+    descEl.textContent = data.desc;
+    defectNameEl.textContent = data.defectName;
+    defectLocEl.textContent = data.defectLoc;
+    tagLabel.textContent = "AI DETECTED · " + data.confidence;
+    statSpeedEl.textContent = data.speed;
+    statAccEl.textContent = data.acc;
+    statEffEl.textContent = data.eff;
+    linkEl.href = data.link;
+
+    tabButtons.forEach(btn => {
+      btn.style.background = btn.dataset.sector === key ? "linear-gradient(135deg, rgba(230,57,70,0.25), rgba(10,14,39,0.9))" : "rgba(10,14,39,0.6)";
+      btn.style.color = btn.dataset.sector === key ? "#ffffff" : "#aab3d1";
+      btn.style.border = btn.dataset.sector === key ? "1.5px solid #e63946" : "1px solid rgba(255,255,255,0.1)";
+      btn.style.boxShadow = btn.dataset.sector === key ? "0 0 16px rgba(230,57,70,0.3)" : "none";
+    });
+  }
+
+  function setMode(mode) {
+    activeMode = mode;
+    if (mode === "ai") {
+      overlayGrid.style.display = "block";
+      boundingBox.style.display = "block";
+      imgEl.style.filter = "contrast(1.15) brightness(0.9)";
+      modeText.textContent = "AI Neural Layer";
+      modeText.style.color = "#00e1ff";
+      btnAi.style.background = "#e63946";
+      btnRaw.style.background = "rgba(255,255,255,0.06)";
+    } else {
+      overlayGrid.style.display = "none";
+      boundingBox.style.display = "none";
+      imgEl.style.filter = "none";
+      modeText.textContent = "Raw Drone RGB/FLIR";
+      modeText.style.color = "#fff";
+      btnRaw.style.background = "#3b82f6";
+      btnAi.style.background = "rgba(255,255,255,0.06)";
+    }
+  }
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => renderSector(btn.dataset.sector));
+  });
+
+  btnRaw.addEventListener("click", () => setMode("raw"));
+  btnAi.addEventListener("click", () => setMode("ai"));
+
+  renderSector("wind");
+  setMode("ai");
+});
+</script>
+
+<style>
+.sector-tab-btn {
+  border-radius: 99px;
+  padding: 10px 22px;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(10,14,39,0.6);
+  color: #aab3d1;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+@media (max-width: 900px) {
+  .saas-console-box {
+    grid-template-columns: 1fr !important;
+  }
+  .saas-steps-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — RevDrones</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="dash-shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="dash-side">
+    <a href="index.html" class="logo" style="font-size:15px;">
+      <svg class="mark" width="24" height="24" viewBox="0 0 30 30" fill="none">
+        <path d="M15 4L24 10L15 16L6 10L15 4Z" fill="#e63946"/>
+        <path d="M15 16V26" stroke="#e63946" stroke-width="2"/>
+        <path d="M9 21H21" stroke="#e63946" stroke-width="2"/>
+      </svg>
+      REV DRONES
+    </a>
+
+    <div class="dash-side-eyebrow">Operations</div>
+    <nav class="dash-nav">
+      <a href="#" data-tab="overview" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        <span>Overview</span>
+      </a>
+      <a href="#" data-tab="bookings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        <span>Bookings</span>
+        <span class="nav-count" id="nav-count-bookings">—</span>
+      </a>
+      <a href="#" data-tab="blog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg>
+        <span>Blog</span>
+      </a>
+      <a href="#" data-tab="reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 17.3l-5.5 3 1.4-6.1L3 9.7l6.2-.5L12 3.5l2.8 5.7 6.2.5-4.9 4.5 1.4 6.1z"/></svg>
+        <span>Reviews</span>
+      </a>
+    </nav>
+
+    <div class="dash-side-foot">
+      <div class="dash-user">
+        <div class="dash-avatar" id="staff-avatar">—</div>
+        <div class="dash-user-meta">
+          <div class="dash-user-mail" id="staff-email">Loading…</div>
+          <div class="dash-user-role">STAFF ACCESS</div>
+        </div>
+      </div>
+      <a href="#" id="logout-btn" class="btn btn-outline btn-block" style="font-size:12.5px;">Sign out</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="dash-main">
+
+    <div class="dash-topbar">
+      <div class="dash-topbar-title">
+        <span id="topbar-title">Overview</span>
+        <span class="crumb">REVDRONES / DASHBOARD</span>
+      </div>
+      <label class="dash-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="table-search" placeholder="Filter this view…">
+      </label>
+      <div class="dash-clock"><span class="live-dot"></span><span id="sys-clock">--:--:--</span></div>
+    </div>
+
+    <div class="dash-content">
+
+      <!-- OVERVIEW -->
+      <div class="dash-view" id="view-overview">
+        <div class="dash-head">
+          <div>
+            <h1>Overview</h1>
+            <p>Live status across bookings and the blog.</p>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi tone-red">
+            <div class="kpi-top">
+              <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+            </div>
+            <div class="num" id="kpi-total">—</div>
+            <div class="lbl">Total bookings</div>
+            <div class="kpi-spark" id="spark-bookings"></div>
+          </div>
+          <div class="kpi tone-amber">
+            <div class="kpi-top">
+              <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            </div>
+            <div class="num" id="kpi-pending">—</div>
+            <div class="lbl">Pending bookings</div>
+          </div>
+          <div class="kpi tone-green">
+            <div class="kpi-top">
+              <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+            </div>
+            <div class="num" id="kpi-week">—</div>
+            <div class="lbl">New this week</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg></div>
+            </div>
+            <div class="num" id="kpi-posts">—</div>
+            <div class="lbl">Published posts</div>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="dash-panel">
+            <div class="dash-panel-head">
+              <h3>7-day booking signal</h3>
+              <span class="tag-sm">BOOKINGS</span>
+            </div>
+            <div class="dash-panel-body">
+              <div class="signal-row">
+                <div class="signal-label">Bookings</div>
+                <div class="signal-bars" id="signal-bookings"></div>
+              </div>
+              <div class="signal-days" id="signal-days"></div>
+            </div>
+          </div>
+
+          <div class="dash-panel">
+            <div class="dash-panel-head">
+              <h3>Recent activity</h3>
+              <span class="tag-sm">LIVE</span>
+            </div>
+            <div class="dash-panel-body">
+              <ul class="activity-feed" id="activity-feed">
+                <li class="activity-empty">Loading…</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKINGS -->
+      <div class="dash-view" id="view-bookings" style="display:none;">
+        <div class="dash-head"><div><h1>Bookings</h1><p>Service requests submitted from the website.</p></div></div>
+        <div class="dash-panel">
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>Client</th><th>Service</th><th>Date / Location</th><th>Details</th><th>Status</th><th>Received</th></tr></thead>
+              <tbody id="bookings-body"><tr><td colspan="6">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOG -->
+      <div class="dash-view" id="view-blog" style="display:none;">
+
+        <div id="blog-list-view">
+          <div class="dash-head">
+            <div><h1>Blog</h1><p>Posts shown on the public site.</p></div>
+            <button class="btn btn-primary" id="new-post-btn">+ New post</button>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+                <tbody id="posts-body"><tr><td colspan="5">Loading…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="blog-editor-view" style="display:none;">
+          <div class="dash-head">
+            <div><h1 id="editor-heading">New post</h1><p>Fields marked * are required.</p></div>
+            <button class="btn btn-outline" id="editor-cancel">← Back to posts</button>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-toolbar">
+              <form id="post-form" class="dash-toolbar-form" style="grid-template-columns:1fr;">
+                <input type="hidden" name="id">
+                <div style="display:grid; grid-template-columns:2fr 1fr; gap:16px;">
+                  <div class="field" style="margin:0;"><label>Title *</label><input type="text" name="title" required></div>
+                  <div class="field" style="margin:0;"><label>Category</label><input type="text" name="category" placeholder="Drone Industry News"></div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                  <div class="field" style="margin:0;"><label>Slug (URL) *</label><input type="text" name="slug" required pattern="[a-z0-9\-]+" placeholder="my-post-title"></div>
+                  <div class="field" style="margin:0;"><label>Author</label><input type="text" name="author" placeholder="RevDrones Team"></div>
+                </div>
+                <div class="field" style="margin:0;"><label>Cover image URL</label><input type="url" name="cover_image_url" placeholder="https://…"></div>
+                <div class="field" style="margin:0;"><label>Excerpt</label><input type="text" name="excerpt" placeholder="One or two sentences shown on the blog card"></div>
+                <div class="field" style="margin:0;">
+                  <label>Content (HTML) *</label>
+                  <textarea name="content" required style="min-height:260px; font-family:var(--mono); font-size:12.5px;" placeholder="<p>Write your post…</p>"></textarea>
+                  <div style="font-size:11.5px; color:var(--ink-faint); margin-top:6px; font-family:var(--mono);">Supports basic HTML: &lt;p&gt; &lt;strong&gt; &lt;em&gt; &lt;ul&gt;&lt;li&gt; &lt;a&gt;</div>
+                </div>
+                <div class="field" style="margin:0;">
+                  <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="published" style="width:auto;"> Published (visible on the site)</label>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <button type="submit" class="btn btn-primary">Save post</button>
+                  <button type="button" class="btn btn-outline" id="delete-post-btn" style="display:none; border-color:var(--red-glow); color:var(--red);">Delete post</button>
+                  <div id="post-msg" class="form-msg"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="dash-view" id="view-reviews" style="display:none;">
+
+        <div id="review-list-view">
+          <div class="dash-head">
+            <div><h1>Reviews</h1><p>Client testimonials shown on the public site.</p></div>
+            <button class="btn btn-primary" id="new-review-btn">+ New review</button>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead><tr><th>Client</th><th>Quote</th><th>Status</th><th>Order</th><th></th></tr></thead>
+                <tbody id="reviews-body"><tr><td colspan="5">Loading…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="review-editor-view" style="display:none;">
+          <div class="dash-head">
+            <div><h1 id="review-editor-heading">New review</h1><p>Fields marked * are required.</p></div>
+            <button class="btn btn-outline" id="review-editor-cancel">← Back to reviews</button>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-toolbar">
+              <form id="review-form" class="dash-toolbar-form" style="grid-template-columns:1fr;">
+                <input type="hidden" name="id">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                  <div class="field" style="margin:0;"><label>Client name *</label><input type="text" name="name" required></div>
+                  <div class="field" style="margin:0;"><label>Role / company</label><input type="text" name="title" placeholder="CEO, Acme Surveyors"></div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                  <div class="field" style="margin:0;"><label>Photo URL</label><input type="url" name="photo_url" placeholder="https://…"></div>
+                  <div class="field" style="margin:0;"><label>Display order</label><input type="number" name="sort_order" value="0" step="1"></div>
+                </div>
+                <div class="field" style="margin:0;"><label>Quote *</label><textarea name="quote" required placeholder="What the client said…" style="min-height:100px;"></textarea></div>
+                <div class="field" style="margin:0;">
+                  <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="published" style="width:auto;" checked> Published (visible on the site)</label>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <button type="submit" class="btn btn-primary">Save review</button>
+                  <button type="button" class="btn btn-outline" id="delete-review-btn" style="display:none; border-color:var(--red-glow); color:var(--red);">Delete review</button>
+                  <div id="review-msg" class="form-msg"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = "https://axxctupcnmzropjtifrz.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4eGN0dXBjbm16cm9wanRpZnJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1NzI5ODgsImV4cCI6MjEwMzE0ODk4OH0.5ZSUAePv27GKjjT6JGZ6O8MuKVa5Dhj_OyDEwfij_rk";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let bookingsData = [], postsData = [], reviewsData = [];
+
+// ---- auth guard ----
+(async () => {
+  const { data } = await sb.auth.getSession();
+  if (!data.session) { window.location.href = "login.html"; return; }
+  const email = data.session.user.email;
+  document.getElementById("staff-email").textContent = email;
+  document.getElementById("staff-avatar").textContent = email.slice(0, 2).toUpperCase();
+  loadAll();
+})();
+
+sb.auth.onAuthStateChange((event) => {
+  if (event === "SIGNED_OUT") window.location.href = "login.html";
+});
+
+document.getElementById("logout-btn").addEventListener("click", async (e) => {
+  e.preventDefault();
+  await sb.auth.signOut();
+  window.location.href = "login.html";
+});
+
+// ---- tab switching ----
+const TAB_TITLES = { overview: "Overview", bookings: "Bookings", blog: "Blog", reviews: "Reviews" };
+document.querySelectorAll(".dash-nav a").forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.querySelectorAll(".dash-nav a").forEach((x) => x.classList.remove("active"));
+    a.classList.add("active");
+    document.querySelectorAll(".dash-view").forEach((v) => (v.style.display = "none"));
+    document.getElementById("view-" + a.dataset.tab).style.display = "block";
+    document.getElementById("topbar-title").textContent = TAB_TITLES[a.dataset.tab] || "";
+    if (a.dataset.tab === "blog") showBlogList();
+    if (a.dataset.tab === "reviews") showReviewList();
+    const search = document.getElementById("table-search");
+    search.value = "";
+    filterActiveTable("");
+  });
+});
+
+// ---- live clock ----
+function tickClock() {
+  document.getElementById("sys-clock").textContent = new Date().toLocaleTimeString([], { hour12: false });
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+// ---- table filter ----
+document.getElementById("table-search").addEventListener("input", (e) => filterActiveTable(e.target.value));
+function filterActiveTable(q) {
+  const view = [...document.querySelectorAll(".dash-view")].find((v) => v.style.display !== "none");
+  if (!view) return;
+  const rows = view.querySelectorAll("tbody tr");
+  const needle = q.trim().toLowerCase();
+  rows.forEach((r) => {
+    if (!needle) { r.style.display = ""; return; }
+    r.style.display = r.textContent.toLowerCase().includes(needle) ? "" : "none";
+  });
+}
+
+function fmtDate(d) {
+  return d ? new Date(d).toLocaleDateString() : "—";
+}
+function statusPill(status) {
+  return `<span class="pill status-${status}">${status || "—"}</span>`;
+}
+function initials(name) {
+  return (name || "?").trim().split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase();
+}
+function timeAgo(d) {
+  if (!d) return "—";
+  const s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
+  if (s < 60) return "just now";
+  if (s < 3600) return Math.floor(s / 60) + "m ago";
+  if (s < 86400) return Math.floor(s / 3600) + "h ago";
+  return Math.floor(s / 86400) + "d ago";
+}
+function slugify(s) {
+  return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+async function loadAll() {
+  await Promise.all([loadBookings(), loadPosts(), loadReviews()]);
+  renderActivity();
+  renderSignal();
+}
+
+// ================= BOOKINGS =================
+async function loadBookings() {
+  const { data, error } = await sb.from("bookings").select("*").order("created_at", { ascending: false });
+  const body = document.getElementById("bookings-body");
+  if (error) { body.innerHTML = `<tr class="row-empty"><td colspan="6">Error loading bookings: ${error.message}</td></tr>`; return; }
+  bookingsData = data || [];
+
+  document.getElementById("kpi-total").textContent = bookingsData.length;
+  document.getElementById("kpi-pending").textContent = bookingsData.filter(b => b.status === "pending").length;
+  document.getElementById("nav-count-bookings").textContent = bookingsData.filter(b => b.status === "pending").length;
+  const weekAgo = Date.now() - 7 * 86400000;
+  document.getElementById("kpi-week").textContent = bookingsData.filter(b => b.created_at && new Date(b.created_at).getTime() > weekAgo).length;
+
+  body.innerHTML = bookingsData.length ? bookingsData.map(b => `
+    <tr>
+      <td><div class="cell-primary"><div class="cell-avatar">${initials(b.full_name)}</div><div><div class="cell-title">${b.full_name}</div><div class="cell-sub">${b.email}${b.phone ? " · " + b.phone : ""}</div>${b.company ? `<div class="cell-sub">${b.company}</div>` : ""}</div></div></td>
+      <td>${b.service || "—"}</td>
+      <td>${fmtDate(b.preferred_date)}${b.location ? "<br><span class='cell-sub'>" + b.location + "</span>" : ""}</td>
+      <td style="max-width:260px;"><span class="cell-sub">${b.details || "—"}</span></td>
+      <td>
+        <select class="status-select" data-id="${b.id}" style="background:var(--navy-900); color:var(--ink); border:1px solid var(--line); border-radius:7px; padding:5px 8px; font-family:var(--mono); font-size:11.5px;">
+          ${["pending","confirmed","completed","cancelled"].map(s => `<option value="${s}" ${b.status === s ? "selected" : ""}>${s}</option>`).join("")}
+        </select>
+      </td>
+      <td>${fmtDate(b.created_at)}</td>
+    </tr>`).join("") : `<tr class="row-empty"><td colspan="6">No bookings yet.</td></tr>`;
+
+  body.querySelectorAll(".status-select").forEach(sel => {
+    sel.addEventListener("change", async () => {
+      const id = sel.dataset.id;
+      const newStatus = sel.value;
+      sel.disabled = true;
+      const { error } = await sb.from("bookings").update({ status: newStatus }).eq("id", id);
+      sel.disabled = false;
+      if (error) { alert("Couldn't update status: " + error.message); return; }
+      const b = bookingsData.find(x => x.id === id);
+      if (b) b.status = newStatus;
+      document.getElementById("kpi-pending").textContent = bookingsData.filter(x => x.status === "pending").length;
+      document.getElementById("nav-count-bookings").textContent = bookingsData.filter(x => x.status === "pending").length;
+    });
+  });
+}
+
+// ================= BLOG =================
+async function loadPosts() {
+  const { data, error } = await sb.from("posts").select("*").order("updated_at", { ascending: false, nullsFirst: false }).order("created_at", { ascending: false });
+  const body = document.getElementById("posts-body");
+  if (error) { body.innerHTML = `<tr class="row-empty"><td colspan="5">Error loading posts: ${error.message}</td></tr>`; return; }
+  postsData = data || [];
+  document.getElementById("kpi-posts").textContent = postsData.filter(p => p.published).length;
+
+  body.innerHTML = postsData.length ? postsData.map(p => `
+    <tr data-id="${p.id}" class="post-row" style="cursor:pointer;">
+      <td class="cell-title">${p.title}</td>
+      <td>${p.category || "—"}</td>
+      <td>${p.published ? statusPill("confirmed") : statusPill("pending")}</td>
+      <td><span class="cell-sub">${fmtDate(p.updated_at || p.created_at)}</span></td>
+      <td><span class="card-go" style="justify-content:flex-end;">Edit
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span></td>
+    </tr>`).join("") : `<tr class="row-empty"><td colspan="5">No posts yet.</td></tr>`;
+
+  body.querySelectorAll(".post-row").forEach(row => {
+    row.addEventListener("click", () => {
+      const post = postsData.find(p => p.id === row.dataset.id);
+      if (post) openEditor(post);
+    });
+  });
+}
+
+function showBlogList() {
+  document.getElementById("blog-list-view").style.display = "block";
+  document.getElementById("blog-editor-view").style.display = "none";
+}
+function showBlogEditor() {
+  document.getElementById("blog-list-view").style.display = "none";
+  document.getElementById("blog-editor-view").style.display = "block";
+}
+
+const postForm = document.getElementById("post-form");
+const postMsg = document.getElementById("post-msg");
+const deleteBtn = document.getElementById("delete-post-btn");
+let editingId = null;
+let slugTouched = false;
+
+document.getElementById("new-post-btn").addEventListener("click", () => openEditor(null));
+document.getElementById("editor-cancel").addEventListener("click", () => { showBlogList(); loadPosts(); });
+
+postForm.title.addEventListener("input", () => {
+  if (!slugTouched) postForm.slug.value = slugify(postForm.title.value);
+});
+postForm.slug.addEventListener("input", () => { slugTouched = true; });
+
+function openEditor(post) {
+  postMsg.textContent = "";
+  postMsg.className = "form-msg";
+  slugTouched = !!post;
+  if (post) {
+    editingId = post.id;
+    document.getElementById("editor-heading").textContent = "Edit post";
+    postForm.title.value = post.title || "";
+    postForm.category.value = post.category || "";
+    postForm.slug.value = post.slug || "";
+    postForm.author.value = post.author || "";
+    postForm.cover_image_url.value = post.cover_image_url || "";
+    postForm.excerpt.value = post.excerpt || "";
+    postForm.content.value = post.content || "";
+    postForm.published.checked = !!post.published;
+    deleteBtn.style.display = "inline-flex";
+  } else {
+    editingId = null;
+    document.getElementById("editor-heading").textContent = "New post";
+    postForm.reset();
+    deleteBtn.style.display = "none";
+  }
+  showBlogEditor();
+}
+
+postForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  postMsg.textContent = "Saving…";
+  postMsg.className = "form-msg";
+
+  const payload = {
+    title: postForm.title.value.trim(),
+    slug: slugify(postForm.slug.value),
+    category: postForm.category.value.trim(),
+    author: postForm.author.value.trim() || "RevDrones Team",
+    cover_image_url: postForm.cover_image_url.value.trim(),
+    excerpt: postForm.excerpt.value.trim(),
+    content: postForm.content.value,
+    published: postForm.published.checked,
+  };
+
+  let error;
+  if (editingId) {
+    ({ error } = await sb.from("posts").update(payload).eq("id", editingId));
+  } else {
+    ({ error } = await sb.from("posts").insert(payload));
+  }
+
+  if (error) {
+    postMsg.textContent = error.code === "23505" ? "That slug is already taken — pick another." : error.message;
+    postMsg.className = "form-msg err";
+    return;
+  }
+  postMsg.textContent = "Saved.";
+  postMsg.className = "form-msg ok";
+  await loadPosts();
+  setTimeout(() => { showBlogList(); }, 500);
+});
+
+deleteBtn.addEventListener("click", async () => {
+  if (!editingId) return;
+  if (!confirm("Delete this post? This can't be undone.")) return;
+  const { error } = await sb.from("posts").delete().eq("id", editingId);
+  if (error) { alert("Couldn't delete: " + error.message); return; }
+  await loadPosts();
+  showBlogList();
+});
+
+// ================= REVIEWS =================
+async function loadReviews() {
+  const { data, error } = await sb.from("testimonials").select("*").order("sort_order", { ascending: true });
+  const body = document.getElementById("reviews-body");
+  if (error) { body.innerHTML = `<tr class="row-empty"><td colspan="5">Error loading reviews: ${error.message}</td></tr>`; return; }
+  reviewsData = data || [];
+
+  body.innerHTML = reviewsData.length ? reviewsData.map(r => `
+    <tr data-id="${r.id}" class="review-row" style="cursor:pointer;">
+      <td><div class="cell-primary"><div class="cell-avatar">${initials(r.name)}</div><div><div class="cell-title">${r.name}</div>${r.title ? `<div class="cell-sub">${r.title}</div>` : ""}</div></div></td>
+      <td style="max-width:320px;"><span class="cell-sub">${(r.quote || "").slice(0, 90)}${(r.quote || "").length > 90 ? "…" : ""}</span></td>
+      <td>${r.published ? statusPill("confirmed") : statusPill("pending")}</td>
+      <td><span class="cell-sub">${r.sort_order ?? 0}</span></td>
+      <td><span class="card-go" style="justify-content:flex-end;">Edit
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span></td>
+    </tr>`).join("") : `<tr class="row-empty"><td colspan="5">No reviews yet.</td></tr>`;
+
+  body.querySelectorAll(".review-row").forEach(row => {
+    row.addEventListener("click", () => {
+      const review = reviewsData.find(r => r.id === row.dataset.id);
+      if (review) openReviewEditor(review);
+    });
+  });
+}
+
+function showReviewList() {
+  document.getElementById("review-list-view").style.display = "block";
+  document.getElementById("review-editor-view").style.display = "none";
+}
+function showReviewEditor() {
+  document.getElementById("review-list-view").style.display = "none";
+  document.getElementById("review-editor-view").style.display = "block";
+}
+
+const reviewForm = document.getElementById("review-form");
+const reviewMsg = document.getElementById("review-msg");
+const deleteReviewBtn = document.getElementById("delete-review-btn");
+let editingReviewId = null;
+
+document.getElementById("new-review-btn").addEventListener("click", () => openReviewEditor(null));
+document.getElementById("review-editor-cancel").addEventListener("click", () => { showReviewList(); loadReviews(); });
+
+function openReviewEditor(review) {
+  reviewMsg.textContent = "";
+  reviewMsg.className = "form-msg";
+  if (review) {
+    editingReviewId = review.id;
+    document.getElementById("review-editor-heading").textContent = "Edit review";
+    reviewForm.name.value = review.name || "";
+    reviewForm.title.value = review.title || "";
+    reviewForm.photo_url.value = review.photo_url || "";
+    reviewForm.sort_order.value = review.sort_order ?? 0;
+    reviewForm.quote.value = review.quote || "";
+    reviewForm.published.checked = !!review.published;
+    deleteReviewBtn.style.display = "inline-flex";
+  } else {
+    editingReviewId = null;
+    document.getElementById("review-editor-heading").textContent = "New review";
+    reviewForm.reset();
+    reviewForm.sort_order.value = reviewsData.length;
+    reviewForm.published.checked = true;
+    deleteReviewBtn.style.display = "none";
+  }
+  showReviewEditor();
+}
+
+reviewForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  reviewMsg.textContent = "Saving…";
+  reviewMsg.className = "form-msg";
+
+  const payload = {
+    name: reviewForm.name.value.trim(),
+    title: reviewForm.title.value.trim(),
+    photo_url: reviewForm.photo_url.value.trim(),
+    sort_order: parseInt(reviewForm.sort_order.value, 10) || 0,
+    quote: reviewForm.quote.value.trim(),
+    published: reviewForm.published.checked,
+  };
+
+  let error;
+  if (editingReviewId) {
+    ({ error } = await sb.from("testimonials").update(payload).eq("id", editingReviewId));
+  } else {
+    ({ error } = await sb.from("testimonials").insert(payload));
+  }
+
+  if (error) {
+    reviewMsg.textContent = error.message;
+    reviewMsg.className = "form-msg err";
+    return;
+  }
+  reviewMsg.textContent = "Saved.";
+  reviewMsg.className = "form-msg ok";
+  await loadReviews();
+  setTimeout(() => { showReviewList(); }, 500);
+});
+
+deleteReviewBtn.addEventListener("click", async () => {
+  if (!editingReviewId) return;
+  if (!confirm("Delete this review? This can't be undone.")) return;
+  const { error } = await sb.from("testimonials").delete().eq("id", editingReviewId);
+  if (error) { alert("Couldn't delete: " + error.message); return; }
+  await loadReviews();
+  showReviewList();
+});
+
+// ================= OVERVIEW WIDGETS =================
+function renderActivity() {
+  const el = document.getElementById("activity-feed");
+  const items = [
+    ...bookingsData.map(b => ({ when: b.created_at, html: `<b>${b.full_name}</b> requested ${b.service || "a service"}`, cls: "booking" })),
+    ...postsData.map(p => ({ when: p.updated_at || p.created_at, html: `${p.published ? "Published" : "Drafted"} <b>${p.title}</b>`, cls: "lead" })),
+    ...reviewsData.map(r => ({ when: r.updated_at || r.created_at, html: `Added review from <b>${r.name}</b>`, cls: "lead" })),
+  ].filter(i => i.when).sort((a, b) => new Date(b.when) - new Date(a.when)).slice(0, 6);
+
+  el.innerHTML = items.length ? items.map(i => `
+    <li>
+      <div class="activity-dot ${i.cls}"></div>
+      <div>
+        <div class="activity-text">${i.html}</div>
+        <div class="activity-time">${timeAgo(i.when)}</div>
+      </div>
+    </li>`).join("") : `<li class="activity-empty">No recent activity.</li>`;
+}
+
+function dayBuckets(items) {
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - i);
+    days.push(d);
+  }
+  return days.map((d, idx) => {
+    const next = idx < 6 ? new Date(days[idx + 1]) : new Date(d.getTime() + 86400000);
+    return items.filter(it => it.created_at && new Date(it.created_at) >= d && new Date(it.created_at) < next).length;
+  });
+}
+function renderSpark(elId, items) {
+  const counts = dayBuckets(items);
+  const max = Math.max(1, ...counts);
+  document.getElementById(elId).innerHTML = counts.map(c => `<i style="height:${Math.max(8, (c / max) * 100)}%"></i>`).join("");
+}
+function renderSignal() {
+  renderSpark("spark-bookings", bookingsData);
+  const counts = dayBuckets(bookingsData);
+  const max = Math.max(1, ...counts);
+  document.getElementById("signal-bookings").innerHTML = counts.map(c => `<i><b style="height:${Math.max(6, (c / max) * 100)}%"></b></i>`).join("");
+  const labels = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    labels.push(d.toLocaleDateString([], { weekday: "narrow" }));
+  }
+  document.getElementById("signal-days").innerHTML = labels.map(l => `<span>${l}</span>`).join("");
+}
+</script>
+</body>
+</html>
